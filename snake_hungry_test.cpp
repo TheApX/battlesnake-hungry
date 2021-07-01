@@ -33,38 +33,22 @@ TEST(BattleSnakeHungryTest, SnakeIsNotBoring) {
   EXPECT_THAT(customization.tail, Ne("default"));
 }
 
-TEST(BattleSnakeHungryTest, SnakeMoves) {
-  // Option 1: Construct board state manually.
+TEST(BattleSnakeHungryTest, BottomLeftOutOfBounds) {
   GameState state{
       .board{
-          .width = kBoardSizeSmall,
-          .height = kBoardSizeSmall,
-          .food{
-              Point(2, 2),
-              Point(10, 7),
-              Point(0, 0),
-          },
+          .width = 5,
+          .height = 5,
           .snakes =
               {
                   Snake{
-                      .id = "one",
+                      .id = "The Very Hungry Caterpillar",
                       .body =
                           {
-                              Point(1, 1),
-                              Point(1, 2),
-                              Point(1, 3),
+                              Point(0, 0),
+                              Point(0, 1),
+                              Point(0, 2),
                           },
                       .health = 100,
-                  },
-                  Snake{
-                      .id = "two",
-                      .body =
-                          {
-                              Point(5, 1),
-                              Point(5, 2),
-                              Point(5, 3),
-                          },
-                      .health = 75,
                   },
               },
       },
@@ -74,16 +58,93 @@ TEST(BattleSnakeHungryTest, SnakeMoves) {
   SnakeHungry battlesnake;
   Battlesnake::MoveResponse move = battlesnake.Move(state);
 
-  // Any reasonable move is OK.
-  EXPECT_THAT(move.move, AnyOf(Move::Left, Move::Right, Move::Up, Move::Down));
+  // Don't go out of bounds.
+  EXPECT_THAT(move.move, AnyOf(Move::Right, Move::Up));
 }
 
-TEST(BattleSnakeHungryTest, LoadTestFromJson) {
-  // Option 2: Load test case from a json file.
-  GameState state = LoadState("test001");
+TEST(BattleSnakeHungryTest, BottomRightOutOfBounds) {
+  GameState state{
+      .board{
+          .width = 5,
+          .height = 5,
+          .snakes =
+              {
+                  Snake{
+                      .id = "The Very Hungry Caterpillar",
+                      .body =
+                          {
+                              Point(4, 0),
+                              Point(4, 1),
+                              Point(4, 2),
+                          },
+                      .health = 100,
+                  },
+              },
+      },
+  };
+  state.you = state.board.snakes.front();
 
   SnakeHungry battlesnake;
   Battlesnake::MoveResponse move = battlesnake.Move(state);
 
-  EXPECT_THAT(move.move, AnyOf(Move::Left, Move::Right, Move::Up, Move::Down));
+  // Don't go out of bounds.
+  EXPECT_THAT(move.move, AnyOf(Move::Left, Move::Up));
+}
+
+TEST(BattleSnakeHungryTest, TopLeftOutOfBounds) {
+  GameState state{
+      .board{
+          .width = 5,
+          .height = 5,
+          .snakes =
+              {
+                  Snake{
+                      .id = "The Very Hungry Caterpillar",
+                      .body =
+                          {
+                              Point(0, 4),
+                              Point(0, 3),
+                              Point(0, 2),
+                          },
+                      .health = 100,
+                  },
+              },
+      },
+  };
+  state.you = state.board.snakes.front();
+
+  SnakeHungry battlesnake;
+  Battlesnake::MoveResponse move = battlesnake.Move(state);
+
+  // Don't go out of bounds.
+  EXPECT_THAT(move.move, AnyOf(Move::Right, Move::Down));
+}
+
+TEST(BattleSnakeHungryTest, TopRightOutOfBounds) {
+  GameState state{
+      .board{
+          .width = 5,
+          .height = 5,
+          .snakes =
+              {
+                  Snake{
+                      .id = "The Very Hungry Caterpillar",
+                      .body =
+                          {
+                              Point(4, 4),
+                              Point(4, 3),
+                              Point(4, 2),
+                          },
+                      .health = 100,
+                  },
+              },
+      },
+  };
+  state.you = state.board.snakes.front();
+
+  SnakeHungry battlesnake;
+  Battlesnake::MoveResponse move = battlesnake.Move(state);
+
+  // Don't go out of bounds.
+  EXPECT_THAT(move.move, AnyOf(Move::Left, Move::Down));
 }
