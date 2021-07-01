@@ -4,6 +4,8 @@
 #include <random>
 #include <vector>
 
+#include "move_comparator.h"
+
 using namespace battlesnake::rules;
 using namespace battlesnake::interface;
 
@@ -33,13 +35,17 @@ Battlesnake::MoveResponse SnakeHungry::Move(const GameState& game_state) {
       Move::Down,
   };
 
-  std::random_device random_device;
-  std::mt19937 generator(random_device());
-  std::uniform_int_distribution<> distribution(0, possible_moves.size() - 1);
+  MoveComparator move_comparator(&game_state.board, &game_state.you);
 
   Battlesnake::MoveResponse result{
-      .move = possible_moves[distribution(generator)],
+      .move = Move::Unknown,
   };
+
+  for (auto move : possible_moves) {
+    if (move_comparator.IsBetter(move, result.move)) {
+      result.move = move;
+    }
+  }
 
   std::cout << "Move: " << game_state.game.id << " turn " << game_state.turn
             << "  -  " << result.move << std::endl;

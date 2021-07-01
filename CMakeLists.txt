@@ -7,7 +7,7 @@ include(FetchContent)
 # Import JSON Library
 FetchContent_Declare(battlesnake-engine-cpp
   GIT_REPOSITORY https://github.com/TheApX/battlesnake-engine-cpp
-  GIT_TAG v0.1.2)
+  GIT_TAG v0.1.3)
 FetchContent_MakeAvailable(battlesnake-engine-cpp)
 
 
@@ -17,9 +17,13 @@ set(CMAKE_CXX_STANDARD 14)
 set(GCC_NO_PSABI_WARNING "-Wno-psabi")
 add_definitions(${GCC_NO_PSABI_WARNING})
 
+set(battlesnake_hungry_SRCS_BASE
+    snake_hungry.cpp
+    move_comparator.cpp
+)
 
 set(battlesnake_hungry_SRCS
-    snake_hungry.cpp
+    ${battlesnake_hungry_SRCS_BASE}
     main.cpp
 )
 
@@ -34,7 +38,7 @@ target_link_libraries(battlesnake_hungry
 
 
 set(battlesnake_hungry_test_SRCS
-    snake_hungry.cpp
+    ${battlesnake_hungry_SRCS_BASE}
     snake_hungry_test.cpp
 )
 
