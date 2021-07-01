@@ -20,5 +20,6 @@ class MoveComparator {
   int& steps(const battlesnake::rules::Point& p) { return steps(p.x, p.y); }
   void initBoardMatrix();
   void markSnakeBodiesOnMatrix();
+  void computeStepsFromFood();
   bool isOutOfBounds(const battlesnake::rules::Point& point);
 };

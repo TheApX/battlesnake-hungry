@@ -1,6 +1,7 @@
 #include "move_comparator.h"
 
 #include <limits>
+#include <queue>
 
 using namespace battlesnake::rules;
 
@@ -88,14 +89,15 @@ int& MoveComparator::steps(int x, int y) {
 }
 
 void MoveComparator::initBoardMatrix() {
-  // Initialize board with zeroes. Two-dimensional matrix is represented as
-  // one-dimensional vector, which holds values line by line.
+  // Initialize board matrix with zeroes. Two-dimensional matrix is represented
+  // as one-dimensional vector, which holds values line by line.
   board_matrix_.resize(board_.width * board_.height, kMatrixUninitialized);
 
   // Mark snake bodies as unreachable.
   markSnakeBodiesOnMatrix();
 
-  // TODO: calculate steps from food.
+  // Compute steps from food.
+  computeStepsFromFood();
 }
 
 void MoveComparator::markSnakeBodiesOnMatrix() {
@@ -104,6 +106,56 @@ void MoveComparator::markSnakeBodiesOnMatrix() {
     for (int i = 0; i < snake.body.size() - 1; ++i) {
       Point p = snake.body[i];
       steps(p.x, p.y) = kMatrixSnakeBody;
+    }
+  }
+}
+
+void MoveComparator::computeStepsFromFood() {
+  // Use BFS with multiple starting points to fill the matrix with distances to
+  // the closest food.
+  std::queue<Point> bfs;
+
+  for (const Point& food : board_.food) {
+    // Push each food coordinates to the queue.
+    bfs.push(food);
+    // Mark that the food is reachable in zero steps there.
+    steps(food) = 0;
+  }
+
+  // Process BFS queue until it is empty.
+  while (!bfs.empty()) {
+    Point current = bfs.front();
+    int current_steps = steps(current);
+    bfs.pop();
+
+    // Initialize the "adjacency list" for current position. Some positions may
+    // be on a snake body or out of bounds - they will be filtered out below.
+    auto around = {
+        current.Left(),
+        current.Right(),
+        current.Up(),
+        current.Down(),
+    };
+
+    for (const Point& next : around) {
+      if (isOutOfBounds(next)) {
+        // Ignore positions out of bounds.
+        continue;
+      }
+      if (steps(next) == kMatrixSnakeBody) {
+        // Ignore moves to snake bodies.
+        continue;
+      }
+      if (steps(next) != kMatrixUninitialized) {
+        // Ignore positions where number of steps is already calculated. Due to
+        // the nature of BFS, the first calculated distance is the lowest.
+        continue;
+      }
+
+      // Found a position that wasn't visited before. Add it to the BFS queue.
+      bfs.push(next);
+      // And mark that it can be reached on the next step.
+      steps(next) = current_steps + 1;
     }
   }
 }
