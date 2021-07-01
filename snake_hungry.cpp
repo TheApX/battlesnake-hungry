@@ -13,8 +13,8 @@ Customization SnakeHungry::GetCustomization() {
   std::cout << "Customization" << std::endl;
 
   return Customization{
-      .color = "#de2ac9",
-      .head = "rudolph",
+      .color = "#2e8244",  // The Very Hungry Caterpillar color.
+      .head = "rudolph",   // Not exactly the same "face", but good enough :)
       .tail = "bonhomme",
   };
 };
@@ -28,17 +28,20 @@ void SnakeHungry::End(const GameState& game_state) {
 };
 
 Battlesnake::MoveResponse SnakeHungry::Move(const GameState& game_state) {
+  // Initialize the main decision making logic with current board state.
+  MoveComparator move_comparator(&game_state.board, &game_state.you);
+
+  // Start with "unknown" move.
+  Battlesnake::MoveResponse result{
+      .move = Move::Unknown,
+  };
+
+  // Try all possible moves, and find the best one.
   std::vector<battlesnake::rules::Move> possible_moves{
       Move::Left,
       Move::Right,
       Move::Up,
       Move::Down,
-  };
-
-  MoveComparator move_comparator(&game_state.board, &game_state.you);
-
-  Battlesnake::MoveResponse result{
-      .move = Move::Unknown,
   };
 
   for (auto move : possible_moves) {
