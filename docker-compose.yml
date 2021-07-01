@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  battlesnake:
+    image: localhost:5000/battlesnake-hungry-cpp
+    deploy:
+      replicas: 2
+      update_config:
+        parallelism: 1
+        delay: 10s
+        max_failure_ratio: 0
+        failure_action: rollback
+    build:
+      context: .
+    restart: always
+    ports:
+      - 12388:12388
