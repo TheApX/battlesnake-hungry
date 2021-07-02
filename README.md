@@ -27,7 +27,7 @@ The Very Hungry Caterpillar isn't very strong battlesnake. Its older brothers [H
 > If a page has no link, it is not available yet but is coming soon.
 
 * Backstory
-* Build, test and run
+* [Build, test and run](docs/build_run.md)
 * Project structure
 * Rule-based battlesnake design
 * Very basic "safety" rules
