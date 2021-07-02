@@ -78,8 +78,16 @@ bool MoveComparator::IsBetter(Move move, Move best) {
     return true;
   }
 
-  // Prefer new point if it is closer to food.
-  return steps(move_point) < steps(best_point);
+  // Prefer move that is closer to food.
+  if (steps(move_point) < steps(best_point)) {
+    return true;
+  }
+  if (steps(move_point) > steps(best_point)) {
+    return false;
+  }
+
+  // If moves are equally good, prefer the old best.
+  return false;
 }
 
 // Convenience function for easy access to the value by x and y. Note that it
