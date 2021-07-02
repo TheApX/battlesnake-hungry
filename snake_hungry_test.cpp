@@ -148,3 +148,166 @@ TEST(BattleSnakeHungryTest, TopRightOutOfBounds) {
   // Don't go out of bounds.
   EXPECT_THAT(move.move, AnyOf(Move::Left, Move::Down));
 }
+
+TEST(BattleSnakeHungryTest, OtherSnakeBody) {
+  GameState state{
+      .board{
+          .width = 5,
+          .height = 5,
+          .snakes =
+              {
+                  Snake{
+                      .id = "The Very Hungry Caterpillar",
+                      .body =
+                          {
+                              Point(1, 2),
+                              Point(2, 2),
+                              Point(3, 2),
+                          },
+                      .health = 100,
+                  },
+                  Snake{
+                      .id = "Smart Caterpillar",
+                      .body =
+                          {
+                              Point(0, 0),
+                              Point(0, 1),
+                              Point(0, 2),
+                              Point(0, 3),
+                              Point(0, 4),
+                          },
+                      .health = 100,
+                  },
+              },
+      },
+  };
+  state.you = state.board.snakes.front();
+
+  SnakeHungry battlesnake;
+  Battlesnake::MoveResponse move = battlesnake.Move(state);
+
+  // Don't go left - there is another snake.
+  // Don't go right - there is our own body.
+  // | . . . .
+  // | . . . .
+  // | o---- .
+  // | . . . .
+  // o . . . .
+  EXPECT_THAT(move.move, AnyOf(Move::Up, Move::Down));
+}
+
+TEST(BattleSnakeHungryTest, DontBreakYourNeck) {
+  GameState state{
+      .board{
+          .width = 5,
+          .height = 5,
+          .snakes =
+              {
+                  Snake{
+                      .id = "The Very Hungry Caterpillar",
+                      .body =
+                          {
+                              Point(0, 0),
+                              Point(1, 0),
+                              Point(1, 1),
+                              Point(0, 1),
+                              Point(0, 2),
+                          },
+                      .health = 100,
+                  },
+              },
+      },
+  };
+  state.you = state.board.snakes.front();
+
+  SnakeHungry battlesnake;
+  Battlesnake::MoveResponse move = battlesnake.Move(state);
+
+  // Any move leads to elimination. Make sure that we don't go back and "break"
+  // our neck. Neck is on the right.
+  // . . . . .
+  // . . . . .
+  // | . . . .
+  // \-\ . . .
+  // o / . . .
+  EXPECT_THAT(move.move, AnyOf(Move::Left, Move::Up, Move::Down));
+}
+
+TEST(BattleSnakeHungryTest, GoToFood) {
+  GameState state{
+      .board{
+          .width = 5,
+          .height = 5,
+          .food =
+              {
+                  Point(0, 0),
+              },
+          .snakes =
+              {
+                  Snake{
+                      .id = "The Very Hungry Caterpillar",
+                      .body =
+                          {
+                              Point(2, 0),
+                              Point(2, 1),
+                              Point(2, 2),
+                              Point(2, 3),
+                              Point(2, 4),
+                          },
+                      .health = 100,
+                  },
+              },
+      },
+  };
+  state.you = state.board.snakes.front();
+
+  SnakeHungry battlesnake;
+  Battlesnake::MoveResponse move = battlesnake.Move(state);
+
+  // Food is on the left, and there is no reachable food on the right:
+  // . . | . .
+  // . . | . .
+  // . . | . .
+  // . . | . .
+  // x . o . .
+  EXPECT_THAT(move.move, AnyOf(Move::Left));
+}
+
+TEST(BattleSnakeHungryTest, GoToClosestFood) {
+  GameState state{
+      .board{
+          .width = 5,
+          .height = 5,
+          .food =
+              {
+                  Point(0, 4),
+                  Point(3, 3),
+              },
+          .snakes =
+              {
+                  Snake{
+                      .id = "The Very Hungry Caterpillar",
+                      .body =
+                          {
+                              Point(2, 0),
+                              Point(2, 1),
+                              Point(2, 2),
+                          },
+                      .health = 100,
+                  },
+              },
+      },
+  };
+  state.you = state.board.snakes.front();
+
+  SnakeHungry battlesnake;
+  Battlesnake::MoveResponse move = battlesnake.Move(state);
+
+  // Food on the right is closer:
+  // x . . . .
+  // . . . x .
+  // . . | . .
+  // . . | . .
+  // . . o . .
+  EXPECT_THAT(move.move, AnyOf(Move::Right));
+}
