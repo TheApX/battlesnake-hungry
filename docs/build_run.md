@@ -29,4 +29,6 @@ docker-compose build
 docker-compose run
 ```
 
+Once started, the web-server listens on port `12388`. You can change it in [source code](../main.cpp).
+
 [Back to contents](../README.md#contents)
