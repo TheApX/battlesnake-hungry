@@ -70,20 +70,26 @@ bool MoveComparator::IsBetter(Move move, Move best) {
     return true;
   }
 
-  // Prefer not to go where there is no reachable food.
-  if (steps(move_point) == kMatrixUninitialized) {
+  // If one move can reach food and the other can't, go where the food is
+  // reachable.
+  if (steps(move_point) == kMatrixUninitialized &&
+      steps(best_point) != kMatrixUninitialized) {
     return false;
   }
-  if (steps(best_point) == kMatrixUninitialized) {
+  if (steps(move_point) != kMatrixUninitialized &&
+      steps(best_point) == kMatrixUninitialized) {
     return true;
   }
 
-  // Prefer move that is closer to food.
-  if (steps(move_point) < steps(best_point)) {
-    return true;
-  }
-  if (steps(move_point) > steps(best_point)) {
-    return false;
+  // If food is reachable, prefer move that is closer to food.
+  if (steps(move_point) != kMatrixUninitialized &&
+      steps(best_point) != kMatrixUninitialized) {
+    if (steps(move_point) < steps(best_point)) {
+      return true;
+    }
+    if (steps(move_point) > steps(best_point)) {
+      return false;
+    }
   }
 
   // If moves are equally good, prefer the old best.
