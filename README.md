@@ -26,11 +26,11 @@ The Very Hungry Caterpillar isn't very strong battlesnake. Its older brothers [H
 
 > If a page has no link, it is not available yet but is coming soon.
 
-* Backstory
+* [Backstory](docs/backstory.md)
 * [Build, test and run](docs/build_run.md)
 * [Project structure](docs/project_structure.md)
-* Rule-based battlesnake design
-* Very basic "safety" rules
-* Finding the shortest path with BFS
+* [Rule-based battlesnake design](docs/design.md)
+* [Basic "safety" rules](docs/basic_rules.md)
+* [Finding the shortest path to food with BFS](docs/path_to_food_bfs.md)
 * Unit-testing
 * What's next
