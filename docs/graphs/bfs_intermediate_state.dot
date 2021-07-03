@@ -1,0 +1,25 @@
+digraph G {
+    A [label="A 1" fillcolor=lightblue style=filled];
+    B [label="B 2" fillcolor=lightblue style=filled];
+    C [label="C 3" fillcolor=red style=filled];
+    D [label="D 4" fillcolor=lightgrey style=filled];
+    E [label="E 5" fillcolor=pink style=filled];
+    F [label="F 6" fillcolor=pink style=filled];
+    G [label="G"];
+    H [label="H"];
+    I [label="I"];
+    J [label="J"];
+
+    A -> B;
+    A -> C;
+    A -> D;
+
+    C -> E;
+    C -> F;
+
+    D -> G;
+
+    D -> H;
+    F -> I;
+    F -> J;
+}

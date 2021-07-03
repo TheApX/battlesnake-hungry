@@ -1,4 +1,4 @@
-# Basic "safety" rules
+# Rules of The Very Hungry Caterpillar
 
 Basic "safety" rules are the first rules checked by the comparison function. Rules checked earlier have higher priority, and basic safety rules make sure that the snake doesn't do obviously dangerous things.
 
@@ -51,7 +51,7 @@ After these pre-calculations the `board_matrix_` vector contains these values fo
 * Distance from the closest food, if food is reachable from it.
 * `kMatrixUninitialized` if food is unreachable.
 
-# Rules of The Very Hungry Caterpillar
+# Rules
 
 ## "Unknown" moves
 

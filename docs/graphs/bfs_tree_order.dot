@@ -1,0 +1,33 @@
+digraph G {
+    A [label="A 1"];
+    B [label="B 2"];
+    C [label="C 3"];
+    D [label="D 4"];
+    E [label="E 5"];
+    F [label="F 6"];
+    G [label="G 7"];
+    H [label="H 8"];
+    I [label="I 9"];
+    J [label="J 10"];
+
+    A -> B;
+    A -> C;
+    A -> D;
+
+    C -> E;
+    C -> F;
+
+    D -> G;
+
+    D -> H;
+    F -> I;
+    F -> J;
+
+    // Separate subgraph
+    X [fillcolor=lightgrey style=filled]
+    Y [fillcolor=lightgrey style=filled]
+    Z [fillcolor=lightgrey style=filled]
+
+    X -> Y;
+    X -> Z;
+}

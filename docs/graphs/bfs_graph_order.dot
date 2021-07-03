@@ -1,0 +1,28 @@
+digraph G {
+    A [label="A 1"];
+    B [label="B 2"];
+    C [label="C 3"];
+    D [label="D 5"];
+    E [label="E 7"];
+    F [label="F 8"];
+    G [label="G 4"];
+    H [label="H 9"];
+    I [label="I 10"];
+    J [label="J 6"];
+
+    A -> B;
+    A -> C;
+    A -> D;
+
+    C -> E;
+    C -> F;
+
+    D -> G;
+
+    D -> H;
+    F -> I;
+    F -> J;
+
+    A -> G [color=red];
+    D -> J [color=red];
+}

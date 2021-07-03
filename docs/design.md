@@ -50,6 +50,6 @@ A fancy battlesnake may be smart enough to compute and cache only what is really
 
 But The Very Hungry Caterpillar is not that smart, and it always pre-computes information needed to find the path to the closest food. We will talk about it [later](path_to_food_bfs.md).
 
-But first let's talk about [basic safety](basic_rules.md).
+But first let's talk about [basic safety and other rules](basic_rules.md).
 
 [Back to contents](../README.md#contents)

@@ -311,3 +311,79 @@ TEST(BattleSnakeHungryTest, GoToClosestFood) {
   // . . o . .
   EXPECT_THAT(move.move, AnyOf(Move::Right));
 }
+
+// --------------------------
+
+#include <queue>
+#include <unordered_map>
+#include <unordered_set>
+
+struct Node {
+  // Array of adjacent nodes, ending with nullptr.
+  Node* adjacent_nodes;
+};
+
+bool IsGoal(Node*);
+
+int BFS(Node* root) {
+  std::queue<Node*> q;
+  std::unordered_map<Node*, int> distances;
+
+  // Push the root initially and mark it as visited.
+  q.push(root);
+  distances[root] = 0;
+
+  // Process queue until it's empty.
+  while (!q.empty()) {
+    // Pop the first element from the queue.
+    Node* current = q.front();
+    q.pop();
+    // If we found the goal, return it.
+    if (IsGoal(current)) {
+      return distances[current];
+    }
+    // Add all not visited adjacent nodes to the queue and mark them as visited.
+    for (Node* adjacent = current->adjacent_nodes; adjacent != nullptr;
+         ++adjacent) {
+      if (distances.find(adjacent) == distances.end()) {
+        distances[adjacent] = distances[current] + 1;
+        q.push(adjacent);
+      }
+    }
+  }
+
+  // If no goal found, return -1, which is not a valid distance.
+  return -1;
+}
+
+std::vector<Node*> ReconstructPath(std::unordered_map<Node*, int>& distances,
+                                   Node* destination) {
+  std::vector<Node*> reversed_result;
+
+  // Start with the last step, and find the previous ones in cycle.
+  Node* current = destination;
+  while (distances[current] != 0) {
+    // Remember current step.
+    reversed_result.push_back(current);
+    // Find the previous step.
+    // This assumes that the graph is non-directional.
+    for (Node* adjacent = current->adjacent_nodes; adjacent != nullptr;
+         ++adjacent) {
+      // We are looking for a node at distance N-1.
+      if (distances[adjacent] == distances[current] - 1) {
+        current = adjacent;
+        break;
+      }
+    }
+  }
+
+  // `reversed_result` now contains all steps except the initial node in
+  // the reversed order. Reverse it and return.
+  std::vector<Node*> result;
+  for (int i = reversed_result.size() - 1; i >= 0; --i) {
+    result.push_back(reversed_result[i]);
+  }
+  return result;
+}
+
+bool IsGoal(Node* n) { return false; }
