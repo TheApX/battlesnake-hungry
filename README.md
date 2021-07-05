@@ -1,6 +1,8 @@
 # The Very Hungry Caterpillar 🍊🍏🍑🍒🍎🐛
 
-Hungry rule-based [BattleSnake](http://play.battlesnake.com) written in C++. Knows how to avoid walls, other snakes and find the closest food. Made for testing and educational purposes. [Public](https://play.battlesnake.com/u/theapx/the-very-hungry-caterpillar/). Plays on [Global Arena](https://play.battlesnake.com/arena/global/).
+Hungry rule-based [BattleSnake](http://play.battlesnake.com) written in C++. Knows how to avoid walls, other snakes and find the closest food. Made for testing and educational purposes. [Public](https://play.battlesnake.com/u/theapx/the-very-hungry-caterpillar/). Can pass a few [challenges](https://play.battlesnake.com/challenges/) and has reached Gold medal on [Global Arena](https://play.battlesnake.com/arena/global/).
+
+![Gold medal on Global Arena](docs/the-very-hungry-caterpillar-global-arena-card.png)
 
 This BattleSnake is based on the web-server provided with the unofficial [C++ BattleSnake engine](https://github.com/TheApX/battlesnake-engine-cpp).
 
