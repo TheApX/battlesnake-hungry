@@ -1,4 +1,4 @@
-# Backstory of The Very Hungry Caterpillar
+# Backstory of the Caterpillar BattleSnakes family
 
 This is the story of the Caterpillar BattleSnakes family, their origins, achievements and future plans.
 
