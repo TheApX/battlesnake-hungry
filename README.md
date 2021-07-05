@@ -26,8 +26,6 @@ The Very Hungry Caterpillar isn't very strong battlesnake. Its older brothers [H
 
 # Contents
 
-> If a page has no link, it is not available yet but is coming soon.
-
 * [Backstory](docs/backstory.md)
 * [Build, test and run](docs/build_run.md)
 * [Project structure](docs/project_structure.md)
@@ -35,4 +33,4 @@ The Very Hungry Caterpillar isn't very strong battlesnake. Its older brothers [H
 * [Rules of The Very Hungry Caterpillar](docs/basic_rules.md)
 * [Finding the shortest path to food with BFS](docs/path_to_food_bfs.md)
 * [Unit testing](docs/unit_tests.md)
-* What's next
+* [What's next](docs/whats_next.md)
