@@ -5,7 +5,7 @@ RUN apt-get update
 RUN apt-get upgrade -y
 
 # Install build tools and dev libraries.
-RUN apt-get install -y g++ cmake git libcurl4-openssl-dev
+RUN apt-get install -y g++ cmake git libcurl4-openssl-dev libssl-dev
 
 # Create dir to copy sources to
 RUN mkdir /src
