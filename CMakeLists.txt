@@ -4,10 +4,10 @@ project(battlesnake_hungry)
 
 include(FetchContent)
 
-# Import JSON Library
+# Import BattleSnake Engine library
 FetchContent_Declare(battlesnake-engine-cpp
   GIT_REPOSITORY https://github.com/TheApX/battlesnake-engine-cpp
-  GIT_TAG v0.1.3)
+  GIT_TAG v0.2.1)
 FetchContent_MakeAvailable(battlesnake-engine-cpp)
 
 
