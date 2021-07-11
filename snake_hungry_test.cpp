@@ -35,6 +35,7 @@ TEST(BattleSnakeHungryTest, SnakeIsNotBoring) {
 }
 
 TEST(BattleSnakeHungryTest, BottomLeftOutOfBounds) {
+  StringPool pool;
   GameState state{
       .board{
           .width = 5,
@@ -42,7 +43,7 @@ TEST(BattleSnakeHungryTest, BottomLeftOutOfBounds) {
           .snakes =
               {
                   Snake{
-                      .id = "The Very Hungry Caterpillar",
+                      .id = pool.Add("The Very Hungry Caterpillar"),
                       .body =
                           {
                               Point{0, 0},
@@ -64,6 +65,7 @@ TEST(BattleSnakeHungryTest, BottomLeftOutOfBounds) {
 }
 
 TEST(BattleSnakeHungryTest, BottomRightOutOfBounds) {
+  StringPool pool;
   GameState state{
       .board{
           .width = 5,
@@ -71,7 +73,7 @@ TEST(BattleSnakeHungryTest, BottomRightOutOfBounds) {
           .snakes =
               {
                   Snake{
-                      .id = "The Very Hungry Caterpillar",
+                      .id = pool.Add("The Very Hungry Caterpillar"),
                       .body =
                           {
                               Point{4, 0},
@@ -93,6 +95,7 @@ TEST(BattleSnakeHungryTest, BottomRightOutOfBounds) {
 }
 
 TEST(BattleSnakeHungryTest, TopLeftOutOfBounds) {
+  StringPool pool;
   GameState state{
       .board{
           .width = 5,
@@ -100,7 +103,7 @@ TEST(BattleSnakeHungryTest, TopLeftOutOfBounds) {
           .snakes =
               {
                   Snake{
-                      .id = "The Very Hungry Caterpillar",
+                      .id = pool.Add("The Very Hungry Caterpillar"),
                       .body =
                           {
                               Point{0, 4},
@@ -122,6 +125,7 @@ TEST(BattleSnakeHungryTest, TopLeftOutOfBounds) {
 }
 
 TEST(BattleSnakeHungryTest, TopRightOutOfBounds) {
+  StringPool pool;
   GameState state{
       .board{
           .width = 5,
@@ -129,7 +133,7 @@ TEST(BattleSnakeHungryTest, TopRightOutOfBounds) {
           .snakes =
               {
                   Snake{
-                      .id = "The Very Hungry Caterpillar",
+                      .id = pool.Add("The Very Hungry Caterpillar"),
                       .body =
                           {
                               Point{4, 4},
@@ -151,6 +155,7 @@ TEST(BattleSnakeHungryTest, TopRightOutOfBounds) {
 }
 
 TEST(BattleSnakeHungryTest, OtherSnakeBody) {
+  StringPool pool;
   GameState state{
       .board{
           .width = 5,
@@ -158,7 +163,7 @@ TEST(BattleSnakeHungryTest, OtherSnakeBody) {
           .snakes =
               {
                   Snake{
-                      .id = "The Very Hungry Caterpillar",
+                      .id = pool.Add("The Very Hungry Caterpillar"),
                       .body =
                           {
                               Point{1, 2},
@@ -168,7 +173,7 @@ TEST(BattleSnakeHungryTest, OtherSnakeBody) {
                       .health = 100,
                   },
                   Snake{
-                      .id = "Smart Caterpillar",
+                      .id = pool.Add("Smart Caterpillar"),
                       .body =
                           {
                               Point{0, 0},
@@ -198,6 +203,7 @@ TEST(BattleSnakeHungryTest, OtherSnakeBody) {
 }
 
 TEST(BattleSnakeHungryTest, DontBreakYourNeck) {
+  StringPool pool;
   GameState state{
       .board{
           .width = 5,
@@ -205,7 +211,7 @@ TEST(BattleSnakeHungryTest, DontBreakYourNeck) {
           .snakes =
               {
                   Snake{
-                      .id = "The Very Hungry Caterpillar",
+                      .id = pool.Add("The Very Hungry Caterpillar"),
                       .body =
                           {
                               Point{0, 0},
@@ -235,6 +241,7 @@ TEST(BattleSnakeHungryTest, DontBreakYourNeck) {
 }
 
 TEST(BattleSnakeHungryTest, GoToFood) {
+  StringPool pool;
   GameState state{
       .board{
           .width = 5,
@@ -246,7 +253,7 @@ TEST(BattleSnakeHungryTest, GoToFood) {
           .snakes =
               {
                   Snake{
-                      .id = "The Very Hungry Caterpillar",
+                      .id = pool.Add("The Very Hungry Caterpillar"),
                       .body =
                           {
                               Point{2, 0},
@@ -275,6 +282,7 @@ TEST(BattleSnakeHungryTest, GoToFood) {
 }
 
 TEST(BattleSnakeHungryTest, GoToClosestFood) {
+  StringPool pool;
   GameState state{
       .board{
           .width = 5,
@@ -287,7 +295,7 @@ TEST(BattleSnakeHungryTest, GoToClosestFood) {
           .snakes =
               {
                   Snake{
-                      .id = "The Very Hungry Caterpillar",
+                      .id = pool.Add("The Very Hungry Caterpillar"),
                       .body =
                           {
                               Point{2, 0},
