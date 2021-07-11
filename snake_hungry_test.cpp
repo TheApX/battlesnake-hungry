@@ -16,11 +16,12 @@ using namespace ::battlesnake::interface;
 using ::testing::AnyOf;
 using ::testing::Ne;
 
-GameState LoadState(const std::string& test_name) {
+GameState LoadState(const std::string& test_name, StringPool& pool) {
   std::ifstream file_in("testdata/" + test_name + ".json");
   std::string str((std::istreambuf_iterator<char>(file_in)),
                   std::istreambuf_iterator<char>());
-  return battlesnake::json::ParseJsonGameState(nlohmann::json::parse(str));
+  return battlesnake::json::ParseJsonGameState(nlohmann::json::parse(str),
+                                               pool);
 }
 
 TEST(BattleSnakeHungryTest, SnakeIsNotBoring) {
@@ -44,9 +45,9 @@ TEST(BattleSnakeHungryTest, BottomLeftOutOfBounds) {
                       .id = "The Very Hungry Caterpillar",
                       .body =
                           {
-                              Point(0, 0),
-                              Point(0, 1),
-                              Point(0, 2),
+                              Point{0, 0},
+                              Point{0, 1},
+                              Point{0, 2},
                           },
                       .health = 100,
                   },
@@ -73,9 +74,9 @@ TEST(BattleSnakeHungryTest, BottomRightOutOfBounds) {
                       .id = "The Very Hungry Caterpillar",
                       .body =
                           {
-                              Point(4, 0),
-                              Point(4, 1),
-                              Point(4, 2),
+                              Point{4, 0},
+                              Point{4, 1},
+                              Point{4, 2},
                           },
                       .health = 100,
                   },
@@ -102,9 +103,9 @@ TEST(BattleSnakeHungryTest, TopLeftOutOfBounds) {
                       .id = "The Very Hungry Caterpillar",
                       .body =
                           {
-                              Point(0, 4),
-                              Point(0, 3),
-                              Point(0, 2),
+                              Point{0, 4},
+                              Point{0, 3},
+                              Point{0, 2},
                           },
                       .health = 100,
                   },
@@ -131,9 +132,9 @@ TEST(BattleSnakeHungryTest, TopRightOutOfBounds) {
                       .id = "The Very Hungry Caterpillar",
                       .body =
                           {
-                              Point(4, 4),
-                              Point(4, 3),
-                              Point(4, 2),
+                              Point{4, 4},
+                              Point{4, 3},
+                              Point{4, 2},
                           },
                       .health = 100,
                   },
@@ -160,9 +161,9 @@ TEST(BattleSnakeHungryTest, OtherSnakeBody) {
                       .id = "The Very Hungry Caterpillar",
                       .body =
                           {
-                              Point(1, 2),
-                              Point(2, 2),
-                              Point(3, 2),
+                              Point{1, 2},
+                              Point{2, 2},
+                              Point{3, 2},
                           },
                       .health = 100,
                   },
@@ -170,11 +171,11 @@ TEST(BattleSnakeHungryTest, OtherSnakeBody) {
                       .id = "Smart Caterpillar",
                       .body =
                           {
-                              Point(0, 0),
-                              Point(0, 1),
-                              Point(0, 2),
-                              Point(0, 3),
-                              Point(0, 4),
+                              Point{0, 0},
+                              Point{0, 1},
+                              Point{0, 2},
+                              Point{0, 3},
+                              Point{0, 4},
                           },
                       .health = 100,
                   },
@@ -207,11 +208,11 @@ TEST(BattleSnakeHungryTest, DontBreakYourNeck) {
                       .id = "The Very Hungry Caterpillar",
                       .body =
                           {
-                              Point(0, 0),
-                              Point(1, 0),
-                              Point(1, 1),
-                              Point(0, 1),
-                              Point(0, 2),
+                              Point{0, 0},
+                              Point{1, 0},
+                              Point{1, 1},
+                              Point{0, 1},
+                              Point{0, 2},
                           },
                       .health = 100,
                   },
@@ -240,7 +241,7 @@ TEST(BattleSnakeHungryTest, GoToFood) {
           .height = 5,
           .food =
               {
-                  Point(0, 0),
+                  Point{0, 0},
               },
           .snakes =
               {
@@ -248,11 +249,11 @@ TEST(BattleSnakeHungryTest, GoToFood) {
                       .id = "The Very Hungry Caterpillar",
                       .body =
                           {
-                              Point(2, 0),
-                              Point(2, 1),
-                              Point(2, 2),
-                              Point(2, 3),
-                              Point(2, 4),
+                              Point{2, 0},
+                              Point{2, 1},
+                              Point{2, 2},
+                              Point{2, 3},
+                              Point{2, 4},
                           },
                       .health = 100,
                   },
@@ -280,8 +281,8 @@ TEST(BattleSnakeHungryTest, GoToClosestFood) {
           .height = 5,
           .food =
               {
-                  Point(0, 4),
-                  Point(3, 3),
+                  Point{0, 4},
+                  Point{3, 3},
               },
           .snakes =
               {
@@ -289,9 +290,9 @@ TEST(BattleSnakeHungryTest, GoToClosestFood) {
                       .id = "The Very Hungry Caterpillar",
                       .body =
                           {
-                              Point(2, 0),
-                              Point(2, 1),
-                              Point(2, 2),
+                              Point{2, 0},
+                              Point{2, 1},
+                              Point{2, 2},
                           },
                       .health = 100,
                   },

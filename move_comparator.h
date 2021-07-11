@@ -1,6 +1,7 @@
 #include <battlesnake/rules/data_types.h>
 
 #include <unordered_map>
+#include <vector>
 
 class MoveComparator {
  public:

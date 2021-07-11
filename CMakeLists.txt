@@ -7,11 +7,11 @@ include(FetchContent)
 # Import BattleSnake Engine library
 FetchContent_Declare(battlesnake-engine-cpp
   GIT_REPOSITORY https://github.com/TheApX/battlesnake-engine-cpp
-  GIT_TAG v0.2.1)
+  GIT_TAG v0.4.0)
 FetchContent_MakeAvailable(battlesnake-engine-cpp)
 
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
 # Suppress long and annoying warning.
 set(GCC_NO_PSABI_WARNING "-Wno-psabi")
