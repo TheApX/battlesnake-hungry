@@ -7,7 +7,7 @@ include(FetchContent)
 # Import BattleSnake Engine library
 FetchContent_Declare(battlesnake-engine-cpp
   GIT_REPOSITORY https://github.com/TheApX/battlesnake-engine-cpp
-  GIT_TAG v0.4.0)
+  GIT_TAG v0.4.1)
 FetchContent_MakeAvailable(battlesnake-engine-cpp)
 
 
