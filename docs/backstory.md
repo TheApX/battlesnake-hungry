@@ -49,9 +49,9 @@ Smart Caterpillar reached the final round of `Google NYC Battlesnake Tournament`
 
 ![Google NYC Tournament results](smart-caterpillar-google-nyc-tournament.png)
 
-At the moment of writing this (July 5) `Summer League 2021` is still in progress. Smart Caterpillar stays in top 10, fluctuating between 4th and 8th place. It has reached Platinum medal, and is on track to reach Elite by the end of Summer League.
+Smart Caterpillar reached Elite Tier in `Summer League 2021` and [finished](https://play.battlesnake.com/arena/summer-league-2021/#leaderboard) 10th with 13,749 points. Unfortunately it didn't get to finals in the [tournament](https://play.battlesnake.com/competitions/summer-league-2021/summer-league-2021-elite/brackets/) and was defeated in quarter-finals.
 
-![Summer League 2021](smart-caterpillar-summer-league-2021.png)
+![Summer League 2021](battlesnake-summer-league-arena.png)
 
 # Future plans
 
