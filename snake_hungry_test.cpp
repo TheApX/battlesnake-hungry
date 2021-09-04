@@ -40,19 +40,17 @@ TEST(BattleSnakeHungryTest, BottomLeftOutOfBounds) {
       .board{
           .width = 5,
           .height = 5,
-          .snakes =
-              {
-                  Snake{
-                      .id = pool.Add("The Very Hungry Caterpillar"),
-                      .body =
-                          {
-                              Point{0, 0},
-                              Point{0, 1},
-                              Point{0, 2},
-                          },
-                      .health = 100,
-                  },
+          .snakes = SnakesVector::Create({
+              Snake{
+                  .id = pool.Add("The Very Hungry Caterpillar"),
+                  .body = SnakeBody::Create({
+                      Point{0, 0},
+                      Point{0, 1},
+                      Point{0, 2},
+                  }),
+                  .health = 100,
               },
+          }),
       },
   };
   state.you = state.board.snakes.front();
@@ -70,19 +68,17 @@ TEST(BattleSnakeHungryTest, BottomRightOutOfBounds) {
       .board{
           .width = 5,
           .height = 5,
-          .snakes =
-              {
-                  Snake{
-                      .id = pool.Add("The Very Hungry Caterpillar"),
-                      .body =
-                          {
-                              Point{4, 0},
-                              Point{4, 1},
-                              Point{4, 2},
-                          },
-                      .health = 100,
-                  },
+          .snakes = SnakesVector::Create({
+              Snake{
+                  .id = pool.Add("The Very Hungry Caterpillar"),
+                  .body = SnakeBody::Create({
+                      Point{4, 0},
+                      Point{4, 1},
+                      Point{4, 2},
+                  }),
+                  .health = 100,
               },
+          }),
       },
   };
   state.you = state.board.snakes.front();
@@ -100,19 +96,17 @@ TEST(BattleSnakeHungryTest, TopLeftOutOfBounds) {
       .board{
           .width = 5,
           .height = 5,
-          .snakes =
-              {
-                  Snake{
-                      .id = pool.Add("The Very Hungry Caterpillar"),
-                      .body =
-                          {
-                              Point{0, 4},
-                              Point{0, 3},
-                              Point{0, 2},
-                          },
-                      .health = 100,
-                  },
+          .snakes = SnakesVector::Create({
+              Snake{
+                  .id = pool.Add("The Very Hungry Caterpillar"),
+                  .body = SnakeBody::Create({
+                      Point{0, 4},
+                      Point{0, 3},
+                      Point{0, 2},
+                  }),
+                  .health = 100,
               },
+          }),
       },
   };
   state.you = state.board.snakes.front();
@@ -130,19 +124,17 @@ TEST(BattleSnakeHungryTest, TopRightOutOfBounds) {
       .board{
           .width = 5,
           .height = 5,
-          .snakes =
-              {
-                  Snake{
-                      .id = pool.Add("The Very Hungry Caterpillar"),
-                      .body =
-                          {
-                              Point{4, 4},
-                              Point{4, 3},
-                              Point{4, 2},
-                          },
-                      .health = 100,
-                  },
+          .snakes = SnakesVector::Create({
+              Snake{
+                  .id = pool.Add("The Very Hungry Caterpillar"),
+                  .body = SnakeBody::Create({
+                      Point{4, 4},
+                      Point{4, 3},
+                      Point{4, 2},
+                  }),
+                  .health = 100,
               },
+          }),
       },
   };
   state.you = state.board.snakes.front();
@@ -160,31 +152,28 @@ TEST(BattleSnakeHungryTest, OtherSnakeBody) {
       .board{
           .width = 5,
           .height = 5,
-          .snakes =
-              {
-                  Snake{
-                      .id = pool.Add("The Very Hungry Caterpillar"),
-                      .body =
-                          {
-                              Point{1, 2},
-                              Point{2, 2},
-                              Point{3, 2},
-                          },
-                      .health = 100,
-                  },
-                  Snake{
-                      .id = pool.Add("Smart Caterpillar"),
-                      .body =
-                          {
-                              Point{0, 0},
-                              Point{0, 1},
-                              Point{0, 2},
-                              Point{0, 3},
-                              Point{0, 4},
-                          },
-                      .health = 100,
-                  },
+          .snakes = SnakesVector::Create({
+              Snake{
+                  .id = pool.Add("The Very Hungry Caterpillar"),
+                  .body = SnakeBody::Create({
+                      Point{1, 2},
+                      Point{2, 2},
+                      Point{3, 2},
+                  }),
+                  .health = 100,
               },
+              Snake{
+                  .id = pool.Add("Smart Caterpillar"),
+                  .body = SnakeBody::Create({
+                      Point{0, 0},
+                      Point{0, 1},
+                      Point{0, 2},
+                      Point{0, 3},
+                      Point{0, 4},
+                  }),
+                  .health = 100,
+              },
+          }),
       },
   };
   state.you = state.board.snakes.front();
@@ -208,21 +197,19 @@ TEST(BattleSnakeHungryTest, DontBreakYourNeck) {
       .board{
           .width = 5,
           .height = 5,
-          .snakes =
-              {
-                  Snake{
-                      .id = pool.Add("The Very Hungry Caterpillar"),
-                      .body =
-                          {
-                              Point{0, 0},
-                              Point{1, 0},
-                              Point{1, 1},
-                              Point{0, 1},
-                              Point{0, 2},
-                          },
-                      .health = 100,
-                  },
+          .snakes = SnakesVector::Create({
+              Snake{
+                  .id = pool.Add("The Very Hungry Caterpillar"),
+                  .body = SnakeBody::Create({
+                      Point{0, 0},
+                      Point{1, 0},
+                      Point{1, 1},
+                      Point{0, 1},
+                      Point{0, 2},
+                  }),
+                  .health = 100,
               },
+          }),
       },
   };
   state.you = state.board.snakes.front();
@@ -246,25 +233,24 @@ TEST(BattleSnakeHungryTest, GoToFood) {
       .board{
           .width = 5,
           .height = 5,
-          .food =
+          .food = CreateBoardBits(
               {
                   Point{0, 0},
               },
-          .snakes =
-              {
-                  Snake{
-                      .id = pool.Add("The Very Hungry Caterpillar"),
-                      .body =
-                          {
-                              Point{2, 0},
-                              Point{2, 1},
-                              Point{2, 2},
-                              Point{2, 3},
-                              Point{2, 4},
-                          },
-                      .health = 100,
-                  },
+              5, 5),
+          .snakes = SnakesVector::Create({
+              Snake{
+                  .id = pool.Add("The Very Hungry Caterpillar"),
+                  .body = SnakeBody::Create({
+                      Point{2, 0},
+                      Point{2, 1},
+                      Point{2, 2},
+                      Point{2, 3},
+                      Point{2, 4},
+                  }),
+                  .health = 100,
               },
+          }),
       },
   };
   state.you = state.board.snakes.front();
@@ -287,24 +273,23 @@ TEST(BattleSnakeHungryTest, GoToClosestFood) {
       .board{
           .width = 5,
           .height = 5,
-          .food =
+          .food = CreateBoardBits(
               {
                   Point{0, 4},
                   Point{3, 3},
               },
-          .snakes =
-              {
-                  Snake{
-                      .id = pool.Add("The Very Hungry Caterpillar"),
-                      .body =
-                          {
-                              Point{2, 0},
-                              Point{2, 1},
-                              Point{2, 2},
-                          },
-                      .health = 100,
-                  },
+              5, 5),
+          .snakes = SnakesVector::Create({
+              Snake{
+                  .id = pool.Add("The Very Hungry Caterpillar"),
+                  .body = SnakeBody::Create({
+                      Point{2, 0},
+                      Point{2, 1},
+                      Point{2, 2},
+                  }),
+                  .health = 100,
               },
+          }),
       },
   };
   state.you = state.board.snakes.front();

@@ -45,7 +45,7 @@ bool MoveComparator::IsBetter(Move move, Move best) {
 
   if (you_.Length() >= 2) {
     // If we have a neck, never go to it. "Broken" neck just doesn't look good.
-    const Point& neck = you_.body[1];
+    const Point& neck = you_.body.Head().Next().Pos();
     if (move_point == neck) {
       return false;
     }
@@ -116,10 +116,13 @@ void MoveComparator::initBoardMatrix() {
 
 void MoveComparator::markSnakeBodiesOnMatrix() {
   for (const Snake& snake : board_.snakes) {
-    // Ignore tail because we can step on it.
-    for (int i = 0; i < snake.body.size() - 1; ++i) {
-      Point p = snake.body[i];
-      steps(p.x, p.y) = kMatrixSnakeBody;
+    // Iterate over all pieces of snake's body, and mark previous piece on
+    // board. Do not mark current, so that eventually all except the last one
+    // are marked. Don't mark tail because we can step on it.
+    Point prev = snake.Head();
+    for (const Point& p : snake.body) {
+      steps(prev.x, prev.y) = kMatrixSnakeBody;
+      prev = p;
     }
   }
 }
@@ -129,7 +132,7 @@ void MoveComparator::computeStepsFromFood() {
   // the closest food.
   std::queue<Point> bfs;
 
-  for (const Point& food : board_.food) {
+  for (const Point& food : board_.Food()) {
     // Push each food coordinates to the queue.
     bfs.push(food);
     // Mark that the food is reachable in zero steps there.
