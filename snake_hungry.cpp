@@ -13,9 +13,9 @@ Customization SnakeHungry::GetCustomization() {
   std::cout << "Customization" << std::endl;
 
   return Customization{
-      .color = "#2e8244",  // The Very Hungry Caterpillar color.
-      .head = "rudolph",   // Not exactly the same "face", but good enough :)
-      .tail = "bonhomme",
+      .color = "#2e8244",
+      .head = "smart-caterpillar",
+      .tail = "rattle",
   };
 };
 
